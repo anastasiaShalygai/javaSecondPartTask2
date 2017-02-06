@@ -6,6 +6,7 @@ import vegetables.Vegetables;
  * Created by Anastasiya on 05.02.2017.
  */
 public class Potatoes extends Vegetables {
+    //You don't use spices variable even in constructor.
     private String species;
 
     public Potatoes(String name, int weight, int calories, String colour, String species) {

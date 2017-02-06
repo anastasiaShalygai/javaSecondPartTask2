@@ -55,6 +55,9 @@ class Implementation {
         System.out.println("        5) Выход ");
     }
 
+    //For both adding and deleting operations you use this method, it could confuse when you want to delete vegetable,
+    // but steel console prints
+    // Введите номер овоща для добавления
     private static void printListOfVegetable() {
         System.out.println("Введите номер овоща для добавления: ");
         System.out.println("        1) Капуста ");
@@ -70,6 +73,7 @@ class Implementation {
                     System.out.println("Данный овощ уже присутствует в салате! Для просмотра добавленных овощей, выберите пункт 3");
                     return;
                 }
+                //Steel we have here hardcoded values for each vegetable, so, for what do we need here a user input operation?
                 Cabbage cabbage = new Cabbage("Капуста", 10, 200, "красная", "зелёные");
                 Cook.addVegetables(cabbage);
                 break;
@@ -99,6 +103,7 @@ class Implementation {
 
         switch (inputData(VEGETABLES_LIMIT)) {
             case 1: {
+                //for what do you use reflection mechanism?
                 if (Cook.checkForVegetables("vegetables.typesOfVegetables.Cabbage")) {
                     System.out.println("Данного овоща нет в салате! Для просмотра добавленных овощей, выберите пункт 3");
                     selectOperation();
@@ -128,6 +133,7 @@ class Implementation {
         }
     }
 
+    //for actual, there was no conditions of user input data.
     private static int inputData(int limit) {
         Scanner scanner = new Scanner(System.in);
         int operationNumber;
@@ -144,7 +150,8 @@ class Implementation {
                 System.out.println("Формат данных должен быть Int. Попробуйте ещё раз: ");
                 return inputData(limit);
             }
-        } finally {
+        }
+        finally {
             //scanner.close();
         }
     }

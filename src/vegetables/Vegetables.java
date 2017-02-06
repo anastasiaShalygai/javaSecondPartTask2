@@ -4,6 +4,7 @@ package vegetables;
  * Created by Anastasiya on 05.02.2017.
  */
 public class Vegetables {
+    //is all vegetable in abstract sense has different names?
     private String name;
     private int weight;
     private int calories;
