@@ -6,6 +6,7 @@ import vegetables.Vegetables;
  * Created by Anastasiya on 05.02.2017.
  */
 public class Cook {
+    //why are they have public modifier?
     public Vegetables[] salad;
     public int sizeOfTheArray;
 
