@@ -1,49 +1,34 @@
 package cook;
 
 import vegetables.Vegetables;
-import vegetables.typesOfVegetables.Cabbage;
-import vegetables.typesOfVegetables.Carrot;
-import vegetables.typesOfVegetables.Potatoes;
 
 /**
  * Created by Anastasiya on 05.02.2017.
  */
 public class Cook {
-    // array initialization better to move to constructor
-    static public Vegetables[] salad = new Vegetables[4];
-    static public int sizeOfTheArray = 0;
+    public Vegetables[] salad;
+    public int sizeOfTheArray;
 
     public Cook() {
+        salad = new Vegetables[5];
+        sizeOfTheArray = 0;
     }
 
-    // all of this methods must not have static modifier, due to all this possibilities must have every class instance.
-    public static boolean checkForVegetables(String className) {
-        if (salad[0] == null) return true;
-        for (int i = 0; i < sizeOfTheArray; i++)
-            if (salad[i].getClass().getName().equals(className)) return false;
-
-        return true;
+    public Vegetables[] getSalad() {
+        return salad;
     }
 
-    //Is this not better to use one universal method? You have hierarchy of vegetables. For what do you duplicate you code for three times?
-    public static void addVegetables(Cabbage cabbage) {
-        salad[sizeOfTheArray++] = cabbage;
+    public void addVegetables(Vegetables... vegetable) {
+        for (Vegetables vegetables : vegetable) {
+            salad[sizeOfTheArray++] = vegetables;
+        }
     }
 
-    public static void addVegetables(Carrot carrot) {
-        salad[sizeOfTheArray++] = carrot;
-    }
-
-    public static void addVegetables(Potatoes potatoes) {
-        salad[sizeOfTheArray++] = potatoes;
-    }
-
-    //it is better to use full english words in methods names
-    public static void delVegetables(String name) {
+    public void delVegetable(Vegetables vegetable) {
         Boolean delElement = false;
 
         for (int i = 0; i < sizeOfTheArray; i++) {
-            if (salad[i].getName().equals(name) || delElement) {
+            if (salad[i].equals(vegetable) || delElement) {
                 salad[i] = salad[i + 1];
 
                 delElement = true;
@@ -52,12 +37,54 @@ public class Cook {
         sizeOfTheArray--;
     }
 
-    public static void printSalad() {
-        System.out.println("Список овощей: ");
-        for (int i = 0; i < sizeOfTheArray; i++) {
-            System.out.print("\n" + i + ") " + salad[i].getName() + " (вес: " + salad[i].getWeight() + ", калории: " + salad[i].getCalories() + ", цвет: " + salad[i].getColour());
+    public void sortCalories() {
+        for (int i = sizeOfTheArray - 1; i > 0; i--) {
+            for (int j = 0; j < i; j++) {
+                if (salad[j].getCalories() > salad[j + 1].getCalories()) {
+                    Vegetables tmp = salad[j];
+                    salad[j] = salad[j + 1];
+                    salad[j + 1] = tmp;
+                }
+            }
+        }
+        System.out.print("After sortCalories");
+        printSalad(salad);
+    }
 
-            //switch (salad[i].getName()) можно ли вывести индивидуальные параметры каждого класса?
+    public void sortWeight() {
+        for (int i = sizeOfTheArray - 1; i > 0; i--) {
+            for (int j = 0; j < i; j++) {
+                if (salad[j].getWeight() > salad[j + 1].getWeight()) {
+                    Vegetables tmp = salad[j];
+                    salad[j] = salad[j + 1];
+                    salad[j + 1] = tmp;
+                }
+            }
+
+        }
+        System.out.print("After sortWeight");
+        printSalad(salad);
+    }
+
+    public static void searchColorOrWeight(Vegetables[] salad, String color, int weight) {
+        Vegetables[] searchArray = new Vegetables[salad.length];
+        int i = 0;
+
+        for (Vegetables vegetables : salad) {
+            if ((vegetables != null) && (color == null) && (vegetables.getWeight() == weight))
+                searchArray[i++] = vegetables;
+            else if ((vegetables != null) && (weight == 0) && (vegetables.getColour().equals(color)))
+                searchArray[i++] = vegetables;
+            else if ((vegetables != null) && (vegetables.getWeight() == weight) && (vegetables.getColour().equals(color)))
+                searchArray[i++] = vegetables;
+        }
+        printSalad(searchArray);
+    }
+
+    public static void printSalad(Vegetables[] salad) {
+        System.out.println("Salad:");
+        for (Vegetables vegetables : salad) {
+            if (vegetables != null) System.out.println(vegetables.toString());
         }
     }
 }

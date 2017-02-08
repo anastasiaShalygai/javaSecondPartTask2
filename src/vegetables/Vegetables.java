@@ -3,35 +3,34 @@ package vegetables;
 /**
  * Created by Anastasiya on 05.02.2017.
  */
-public class Vegetables {
-    //is all vegetable in abstract sense has different names?
-    private String name;
-    private int weight;
-    private int calories;
-    private String colour;
+public abstract class Vegetables {
 
-    public Vegetables(String name, int weight, int calories, String colour) {
-        this.name = name;
-        this.weight = weight;
-        this.calories = calories;
-        this.colour = colour;
-    }
+        private int weight;
+        private int calories;
+        private String colour;
 
-    public String getName() {
-        return name;
-    }
+        public Vegetables(int weight, int calories, String colour) {
+            this.weight = weight;
+            this.calories = calories;
+            this.colour = colour;
+        }
 
-    public int getWeight() {
-        return weight;
-    }
+        public int getWeight() {
+            return weight;
+        }
 
-    public int getCalories() {
-        return calories;
-    }
+        public int getCalories() {
+            return calories;
+        }
 
-    public String getColour() {
-        return colour;
+        public void setCalories(int calories) {
+            this.calories = calories;
+        }
+
+        public String getColour() {
+            return colour;
+        }
+
     }
-}
 
 
